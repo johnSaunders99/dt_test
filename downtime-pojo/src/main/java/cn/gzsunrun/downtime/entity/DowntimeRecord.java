@@ -3,9 +3,12 @@ package cn.gzsunrun.downtime.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+
+import java.util.List;
 
 /**
  * @author john saunders
@@ -58,6 +61,10 @@ public class DowntimeRecord {
     @ApiModelProperty("班组名")
     @TableField(exist = false)
     private String className;
+
+    @ApiModelProperty("图片组")
+    @TableField(typeHandler = JacksonTypeHandler.class)
+    private List<String> fileBaseIds;
 
 
 }

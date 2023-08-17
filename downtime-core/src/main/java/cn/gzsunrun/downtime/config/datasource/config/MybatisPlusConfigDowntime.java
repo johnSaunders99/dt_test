@@ -50,7 +50,7 @@ public class MybatisPlusConfigDowntime {
         dataSource.setUniqueResourceName("downtime");
         log.warn("正在执行多数据源生成数据库文件 " + dataSource);
         Boolean baselinemigrate = Boolean.valueOf(env.getProperty("spring.flyway.baseline-on-migrate"));
-        Boolean enable = Boolean.valueOf(env.getProperty("spring.dynamic.datasource.device.flyway"));
+        Boolean enable = Boolean.valueOf(env.getProperty("spring.dynamic.datasource.downtime.flyway"));
         if (enable){
             Flyway flyway = Flyway.configure()
                     .dataSource(mysqlXADataSource)

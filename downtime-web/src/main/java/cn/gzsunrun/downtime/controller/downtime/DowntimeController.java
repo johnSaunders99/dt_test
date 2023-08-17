@@ -7,11 +7,14 @@ import cn.gzsunrun.downtime.service.DowntimeService;
 import cn.gzsunrun.oars.dbutils.entity.ResultPage;
 import cn.gzsunrun.oars.dbutils.page.OarsPageUtil;
 import cn.gzsunrun.oars.entity.OarsApiResponse;
+import cn.hutool.core.util.StrUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author john saunders
@@ -48,8 +51,21 @@ public class DowntimeController {
             record.setId(param.getId());
             record.setCount(param.getCount());
             record.setRemark(param.getRemark());
+            record.setFileBaseIds(param.getFileBaseIds());
             if (param.getId()==null){
                 throw new RuntimeException("请选择标记记录!");
+            }
+            try {
+                DowntimeRecord byId = downtimeService.getById(param.getId());
+                if (byId!=null){
+                    List<String> fileBaseIds = byId.getFileBaseIds();
+                    if (StrUtil.isBlank(param.getRemark())){
+                        //不改remark的话保持不变
+                        record.setFileBaseIds(fileBaseIds);
+                    }
+                }
+            }catch (Exception e){
+                //找不到 ignore
             }
             return OarsApiResponse.success(downtimeService.saveOrUpdate(record));
         } catch (Exception e){

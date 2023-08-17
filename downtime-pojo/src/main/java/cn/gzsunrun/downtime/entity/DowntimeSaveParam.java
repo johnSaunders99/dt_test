@@ -2,6 +2,8 @@ package cn.gzsunrun.downtime.entity;
 
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * @author john saunders
  * @description:
@@ -15,5 +17,7 @@ public class DowntimeSaveParam {
     private String remark;
 
     private Boolean count;
+
+    private List<String> fileBaseIds;
 
 }
