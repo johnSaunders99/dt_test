@@ -1,0 +1,51 @@
+##服务配置
+server:
+  servlet:
+    context-path: ${SERVER_CONTEXT_PATH:/attendance/api}
+  port: ${SERVER_PORT:8060}
+  error:
+    include-message: ALWAYS
+
+# Spring配置
+spring:
+  # 资源信息
+  messages:
+    # 国际化资源文件路径
+    basename: i18n/messages
+  profiles:
+    active: swagger,idaas,datasource,lapi
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
+#  jackson:
+#    default-property-inclusion: NON_EMPTY
+#做限制的参数配置
+  servlet:
+    multipart:
+      enabled: true #默认支持文件上传
+      max-file-size: -1 # 最大支持文件大小
+      max-request-size: -1 # 最大支持请求大小
+
+
+###定时器表达式
+schedule:
+  check-tran:
+    cron: ${SCHEDULE_CHECK_TRAN_CRON:1 1 1 1 1 ?}
+    enable: ${SCHEDULE_CHECK_TRAN_CRON_ENABLE:false}
+
+#日志
+# 日志配置
+logging:
+  level:
+    cn.gzsunrun: ${LOGGING_LEVEL_SUNRUN:debug}
+  config: classpath:logback.xml
+
+yc:
+  process:
+    hr-url: ${YC_PROCESS_HR_URL:http://192.168.10.88:8082/services/kqSynToADService?wsdl}
+  click:
+    cluster: ${YC_CLICK_DB_CLUSTER_NAME:}
+
+forest:
+## 日志总开关，打开/关闭Forest请求/响应日志 (默认为 true)
+  log-enabled: ${FOREST_LOG_ENABLED:true}

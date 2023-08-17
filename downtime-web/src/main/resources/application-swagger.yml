@@ -1,0 +1,17 @@
+app:
+  apidoc:
+    enable: true
+    api-url: https://spc-app.bu.gzsunrun.cn
+    title: attendance考勤项目-管理后台接口
+    description: attendance考勤项目-管理后台接口
+    base-package: cn.gzsunrun.downtime.controller
+    version: v1
+    author-name: SimonMai
+    author-email: mjl@gzsunrun.cn
+    author-index: https://www.sunruninfo.com
+  ui:
+    enable: true
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER

@@ -1,0 +1,4 @@
+netty:
+  http:
+    connection: 1
+    port:  ${ys_lapi_netty_port:6666}

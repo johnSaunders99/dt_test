@@ -1,0 +1,64 @@
+
+
+##用户中心配置
+oars:
+  idaas:
+    app:
+      enable: true
+      url: ${IDAAS_URL:https://tobacco-kq.oars.gzsunrun.cn}
+      appId: ${IDAAS_APPID:695acebd-efc2-4171-a683-cd3c7de36c3a}
+      secretKey: ${IDAAS_SECRET_KEY:O87tbADRM5JoVzvbrjeeA0uVsskUgkD8}
+      interceptor:
+        enable: true
+        user-kind-list:
+          Personal:
+            - /**
+          Organization:
+            - /**
+        ignore-urls:
+          - /webjars/**
+          - /swagger/**
+          - /system/**
+          - /swagger-ui.html
+          - /swagger-resources/**
+          - /swagger/**
+          - /error
+          - /**/v2/api-docs
+          - /**/v2/api-docs-ext
+          - /doc.html
+          - /static/**
+          - /project/**
+          - /client/api/**
+          - /u/**
+          - /wx/**
+          - /**/*.js
+          - /**/*.css
+          - /**/*.png
+          - /**/*.ico
+          - /public/**
+          - /canteen/goods/laststock/**
+          - /canteen/screen/**
+  luoshu:
+    enable: true
+    url: ${LUOSHU_URL:https://tobacco-kq.oars.gzsunrun.cn/eform}
+  #  oars:
+#    beacon:
+#      enable: ${MESSAGE_API_ENABLE:true}
+#      url: ${MESSAGE_API_URL:https://app.oars.gzsunrun.cn/beacon}
+#      appId: ${MESSAGE_API_APP_ID:f90c508f-c950-482c-9b7b-aaefc6afb75d}
+#      secretKey: ${MESSAGE_API_SECRET_KEY:TTlFc6cmZ3VMxmNPEJvv70kTnnnZHicI}
+
+  filebase:
+    enable: true
+    url: ${FILEBASE_URL:https://tobaccoxz-bmo.oars.gzsunrun.cn}
+  flow:
+    host: ${OARS_FLOW_HOST:https://tobaccoxz-bmo.oars.gzsunrun.cn}
+
+### 消息中心相关配置
+message-api:
+  url: ${MESSAGE_API_URL:https://tobacco.oars.gzsunrun.cn/info-center/api}
+  appId: ${MESSAGE_API_APP_ID:f90c508f-c950-482c-9b7b-aaefc6afb75d}
+  secretKey: ${MESSAGE_API_SECRET_KEY:TTlFc6cmZ3VMxmNPEJvv70kTnnnZHicI}
+wx:
+  page:
+    url: ${VUE_WX_PAGE_URL:https://tobacco-xz.oars.gzsunrun.cn}
