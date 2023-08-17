@@ -53,7 +53,7 @@ public interface Sunrunclient {
      * @param
      * @return
      */
-    @PostRequest(value = "/api/v11/findGjkByLkFaultRecord", contentType = "application/json"
+    @PostRequest(value = "/api/v13/findGjkByLkFaultRecord", contentType = "application/json"
     )
     @SSLSocketFactoryBuilder(value = MySSLSocketFactoryBuilder.class)
     <T> ForestResponse<SunrunApiResponse<SunrunTPage<DowntimeRecord>>> pageGjkFaultRecord(@Query("token") String token ,@JSONBody DowntimeClientParam body, @Header Map<String, Object> headerMap);

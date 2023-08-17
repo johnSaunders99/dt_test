@@ -94,10 +94,10 @@ public class DowntimeServiceImpl extends ServiceImpl<DowntimeMapper, DowntimeRec
         notInError.add("通讯异常");
         List<String> ids = datas.parallelStream().map(DowntimeRecord::getId).collect(Collectors.toList());
         Map<String, DowntimeRecord> downtimeRecords = baseMapper.selectBatchIds(ids).parallelStream()
-                .map(o->{
-                    o.setDate(DateUtil.parse(o.getCreatetime(), DatePattern.NORM_DATETIME_FORMAT).getTime());
-                    return o;
-                }).collect(Collectors.toMap(DowntimeRecord::getId, o->o));
+                .collect(Collectors.toMap(DowntimeRecord::getId, o->o));
+        datas.parallelStream().forEach(o->{
+            o.setDate(DateUtil.parse(o.getCreatetime(), DatePattern.NORM_DATETIME_FORMAT).getTime());
+        });
         for (DowntimeRecord record :datas){
             if (!downtimeRecords.containsKey(record.getId())){
                 //不存在,补时间和是否

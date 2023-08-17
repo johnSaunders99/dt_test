@@ -6,6 +6,8 @@ import cn.gzsunrun.downtime.entity.DowntimeClientParam;
 import cn.gzsunrun.downtime.entity.DowntimeRecord;
 import cn.gzsunrun.downtime.service.ISysConfigService;
 import cn.gzsunrun.oars.dbutils.page.OarsPageUtil;
+import cn.gzsunrun.oars.idaas.entity.OarsTokenInfo;
+import cn.gzsunrun.oars.idaas.utils.OarsAuthUtil;
 import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
@@ -55,9 +57,12 @@ public class SunrunService {
     private Map<String, Object> acRequestHeaders(Map<String, Object> headers) {
         long current = DateUtil.current();
         //30分钟重新登录
-        if (current > lastTimeStamp + (30 * 60 * 1000) || headers.get("sessionid") == null) {
+        if (current > lastTimeStamp + (30 * 60 * 1000) || headers.get("token") == null) {
             log.info("尝试登录");
             try {
+                OarsTokenInfo userTokenInfo = OarsAuthUtil.getUserTokenInfo();
+                String tokenStr = userTokenInfo.getTokenStr();
+                headers.put("X-Oars-Token",tokenStr);
                 Map<String, Object> login = login(headers);
                 return login;
             } catch (Throwable e) {
