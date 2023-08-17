@@ -1,7 +1,7 @@
 ##服务配置
 server:
   servlet:
-    context-path: ${SERVER_CONTEXT_PATH:/attendance/api}
+    context-path: ${SERVER_CONTEXT_PATH:/downtime/api}
   port: ${SERVER_PORT:8060}
   error:
     include-message: ALWAYS

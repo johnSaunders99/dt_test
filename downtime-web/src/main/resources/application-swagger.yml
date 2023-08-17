@@ -2,8 +2,8 @@ app:
   apidoc:
     enable: true
     api-url: https://spc-app.bu.gzsunrun.cn
-    title: attendance考勤项目-管理后台接口
-    description: attendance考勤项目-管理后台接口
+    title: 小停机应用-管理后台接口
+    description: 小停机应用-管理后台接口
     base-package: cn.gzsunrun.downtime.controller
     version: v1
     author-name: SimonMai
