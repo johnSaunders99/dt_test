@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.dtflys.forest.annotation.*;
 import com.dtflys.forest.http.ForestResponse;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -57,6 +58,19 @@ public interface Sunrunclient {
     )
     @SSLSocketFactoryBuilder(value = MySSLSocketFactoryBuilder.class)
     <T> ForestResponse<SunrunApiResponse<SunrunTPage<DowntimeRecord>>> pageGjkFaultRecord(@Query("token") String token ,@JSONBody DowntimeClientParam body, @Header Map<String, Object> headerMap);
+
+
+
+    /**
+     * json通用请求
+     *
+     * @param
+     * @return
+     */
+    @PostRequest(value = "/api/v2/getsbibUnique", contentType = "application/json"
+    )
+    @SSLSocketFactoryBuilder(value = MySSLSocketFactoryBuilder.class)
+    <T> ForestResponse<SunrunApiResponse<SunrunTPage<DowntimeRecord>>> getFaultEquipId(@Query("token") String token, @Header Map<String, Object> headerMap);
 
 
 }

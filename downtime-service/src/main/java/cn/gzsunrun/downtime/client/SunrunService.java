@@ -124,6 +124,9 @@ public class SunrunService {
             token = headers.get("token").toString();
         }
         ForestResponse<SunrunApiResponse<SunrunTPage<DowntimeRecord>>> sunrunApiResponseForestResponse = forestClient.pageGjkFaultRecord(token, downtimeClientParam, headers);
+        if (sunrunApiResponseForestResponse.getStatusCode()==404){
+            return null;
+        }
         if (!sunrunApiResponseForestResponse.isSuccess()){
             if (retryTime> 5){
                 if (sunrunApiResponseForestResponse.getException()!=null){
@@ -151,6 +154,57 @@ public class SunrunService {
             }else {
                 int i = retryTime + 1;
                 return getPageData(param, pageSize, current, i);
+            }
+        }
+        return null;
+    }
+
+
+    /**
+     * 获取sunrun内的设备名称
+     *
+     * @return
+     */
+    public SunrunTPage<DowntimeRecord> equIdDataList(Integer retryTime) {
+        if (retryTime == null){
+            retryTime = 0;
+        }
+        Map<String, Object> headers = acRequestHeaders(getHeaders());
+        String token = "";
+        if (headers.containsKey("token")){
+            token = headers.get("token").toString();
+        }
+        ForestResponse<SunrunApiResponse<SunrunTPage<DowntimeRecord>>> sunrunApiResponseForestResponse = forestClient.getFaultEquipId(token, headers);
+        if (sunrunApiResponseForestResponse.getStatusCode()==404){
+            return null;
+        }
+        if (!sunrunApiResponseForestResponse.isSuccess()){
+            if (retryTime> 5){
+                if (sunrunApiResponseForestResponse.getException()!=null){
+                    throw new RuntimeException(sunrunApiResponseForestResponse.getException());
+                }             else if ( sunrunApiResponseForestResponse.getResult()!=null && sunrunApiResponseForestResponse.getResult().getMessage()!=null){
+                    throw new RuntimeException(sunrunApiResponseForestResponse.getResult().getMessage());
+                }
+            }else {
+                int i = retryTime + 1;
+                return equIdDataList(i);
+            }
+        }else {
+            SunrunApiResponse<SunrunTPage<DowntimeRecord>> result = sunrunApiResponseForestResponse.getResult();
+            if (result.getCode() == 404 || sunrunApiResponseForestResponse.getStatusCode()==404){
+                return null;
+            }
+            if (result.isSuccess()){
+                return result.getContent();
+            }else if (retryTime> 5){
+                if (sunrunApiResponseForestResponse.getException()!=null){
+                    throw new RuntimeException(sunrunApiResponseForestResponse.getException());
+                }             else if ( sunrunApiResponseForestResponse.getResult()!=null && sunrunApiResponseForestResponse.getResult().getMessage()!=null){
+                    throw new RuntimeException(sunrunApiResponseForestResponse.getResult().getMessage());
+                }
+            }else {
+                int i = retryTime + 1;
+                return equIdDataList(i);
             }
         }
         return null;

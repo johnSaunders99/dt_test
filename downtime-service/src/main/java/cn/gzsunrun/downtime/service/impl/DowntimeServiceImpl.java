@@ -173,4 +173,14 @@ public class DowntimeServiceImpl extends ServiceImpl<DowntimeMapper, DowntimeRec
         saveOrUpdate(record);
         return record.getId();
     }
+
+    @Override
+    public List<DowntimeRecord> getEquipDataList() {
+        List<DowntimeRecord> res = new ArrayList<>();
+        SunrunTPage<DowntimeRecord> downtimeRecordSunrunTPage = srService.equIdDataList(0);
+        if (downtimeRecordSunrunTPage!=null){
+            res = downtimeRecordSunrunTPage.getList();
+        }
+        return res;
+    }
 }

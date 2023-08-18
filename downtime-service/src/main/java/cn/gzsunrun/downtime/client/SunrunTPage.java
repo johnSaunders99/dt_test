@@ -16,5 +16,6 @@ public class SunrunTPage<T> {
 
     private String token;
 
+    private List<T> list;
 
 }

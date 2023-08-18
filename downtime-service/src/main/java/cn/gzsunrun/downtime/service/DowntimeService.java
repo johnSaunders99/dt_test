@@ -22,6 +22,8 @@ public interface DowntimeService extends IService<DowntimeRecord> {
     List<DowntimeCountRes> countingTotal(Long monthTimestamp);
     String editDowntimeCountable(DowntimeRecord record);
 
+    List<DowntimeRecord> getEquipDataList();
+
 
 
 

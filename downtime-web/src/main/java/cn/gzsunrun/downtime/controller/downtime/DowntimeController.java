@@ -42,6 +42,17 @@ public class DowntimeController {
             return OarsApiResponse.fail(e.getMessage());
         }
     }
+    @ApiOperation(value = "获取故障采集的设备列表")
+    @GetMapping("/equIds")
+    public OarsApiResponse<List<DowntimeRecord>> equIds(){
+        try {
+
+            return OarsApiResponse.success(downtimeService.getEquipDataList());
+        } catch (Exception e){
+            e.printStackTrace();
+            return OarsApiResponse.fail(e.getMessage());
+        }
+    }
 
     @ApiOperation(value = "更改故障是否采集")
     @PostMapping("/save")
